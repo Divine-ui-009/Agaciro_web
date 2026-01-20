@@ -4,7 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const path = require('path');
 const uploadErrorHandler = require('./middleware/uploadErrorHandler');
-import { seedAdmin } from './seedAdmin';
+const seedAdmin = require('./seedAdmin');
 
 const app = express();
 
@@ -42,7 +42,7 @@ mongoose.connect(process.env.MONGO_URI, {
     console.log('Connected to MongoDB');
 
     await seedAdmin();
-    
+
 }).catch((err) => {
     console.error('Error connecting to MongoDB:', err.message);
 });

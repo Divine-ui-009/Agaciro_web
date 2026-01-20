@@ -40,4 +40,4 @@ async function seedAdmin() {
   }
 }
 
-seedAdmin();
+module.exports = seedAdmin;
