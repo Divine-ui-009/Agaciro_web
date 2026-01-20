@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const path = require('path');
 const uploadErrorHandler = require('./middleware/uploadErrorHandler');
+import { seedAdmin } from './seedAdmin';
 
 const app = express();
 
@@ -37,8 +38,11 @@ app.get('/', (req, res) => {
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-}).then(() => {
+}).then(async () => {
     console.log('Connected to MongoDB');
+
+    await seedAdmin();
+    
 }).catch((err) => {
     console.error('Error connecting to MongoDB:', err.message);
 });
