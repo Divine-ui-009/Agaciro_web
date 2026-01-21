@@ -18,7 +18,7 @@ async function seedAdmin() {
       await admin.save();
 
       console.log('Admin existed — password reset correctly');
-      process.exit(0);
+      return;
     }
 
     await User.create({
@@ -32,11 +32,9 @@ async function seedAdmin() {
     });
 
     console.log('Super admin created successfully');
-    process.exit(0);
 
   } catch (err) {
-    console.error(err);
-    process.exit(1);
+    console.error('Error seeding admin: ', err.message);
   }
 }
 
