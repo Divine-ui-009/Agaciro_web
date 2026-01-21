@@ -50,8 +50,8 @@ export default function Navbar() {
                     <div className="hidden sm:flex items-center gap-3">
                         {!user && (
                             <>
-                                <Link to="/auth/login" className="text-gray-600 text-sm hover:text-gray-900">Login</Link>
-                                <Link to="/auth/register" className="text-gray-600 text-sm hover:text-gray-900">Register</Link>
+                                <Link to="/login" className="text-gray-600 text-sm hover:text-gray-900">Login</Link>
+                                <Link to="/register" className="text-gray-600 text-sm hover:text-gray-900">Register</Link>
                             </>
                         )}
 
@@ -85,8 +85,8 @@ export default function Navbar() {
                         <Link to="/products" onClick={() => setMenuOpen(false)} className="block text-gray-700 py-2">Products</Link>
                         {!user && (
                             <>
-                                <Link to="/auth/login" onClick={() => setMenuOpen(false)} className="block text-gray-700 py-2">Login</Link>
-                                <Link to="/auth/register" onClick={() => setMenuOpen(false)} className="block text-gray-700 py-2">Register</Link>
+                                <Link to="/login" onClick={() => setMenuOpen(false)} className="block text-gray-700 py-2">Login</Link>
+                                <Link to="/register" onClick={() => setMenuOpen(false)} className="block text-gray-700 py-2">Register</Link>
                             </>
                         )}
                         {user && (

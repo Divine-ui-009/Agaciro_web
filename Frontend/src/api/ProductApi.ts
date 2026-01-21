@@ -34,7 +34,7 @@ export const addProduct = async (product: Omit<Product, '_id'>, imageFile?: File
         formData.append("productImage", imageFile);
     }
 
-    return await api.post("/api/products", formData, {
+    return await api.post("/api/products/", formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         },

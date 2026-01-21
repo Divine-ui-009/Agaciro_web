@@ -59,7 +59,7 @@ export default function Products() {
               onClick={() => navigate('/create-order')}
               className="bg-green-700 text-white px-4 py-2 rounded-lg"
             >
-              Create Order
+              New +
             </button>
           </div>
         </div>

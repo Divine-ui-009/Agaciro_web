@@ -1,23 +1,11 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
-
 const User = require('./models/User');
 
 async function seedAdmin() {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-
-    const plainPassword = process.env.SUPERADMIN_PASSWORD || 'Admin@123';
-
-    let admin = await User.findOne({ role: 'admin' });
+    const admin = await User.findOne({ role: 'admin' });
 
     if (admin) {
-      admin.password = plainPassword; // ✅ plain
-      admin.isVerified = true;
-      admin.isSuperAdmin = true;
-      await admin.save();
-
-      console.log('Admin existed — password reset correctly');
+      console.log('Admin already exists — skipping seeding.');
       return;
     }
 
@@ -25,7 +13,7 @@ async function seedAdmin() {
       userName: 'Olivier',
       email: 'kwizeraolivier2006@gmail.com',
       phone: '+250790096244',
-      password: plainPassword, // ✅ plain
+      password: process.env.SUPERADMIN_PASSWORD || 'Admin@123', // ✅ plain
       role: 'admin',
       isVerified: true,
       isSuperAdmin: true,

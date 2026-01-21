@@ -28,7 +28,7 @@ function Register() {
     try {
       setLoading(true);
       await api.post("/api/auth/register", { userName: name, email, phone, password });
-      navigate("/auth/login");
+      navigate("/login");
     } catch (err: any) {
       setError(err.response?.data?.message || "Registration failed");
     } finally {
@@ -230,7 +230,7 @@ function Register() {
 
           <p className="text-sm text-center text-gray-600 mt-6">
             Already have an account?{" "}
-            <Link to="/auth/login" className="text-blue-600 font-semibold">
+            <Link to="/login" className="text-blue-600 font-semibold">
               Login
             </Link>
           </p>
