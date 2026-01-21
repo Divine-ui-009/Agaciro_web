@@ -54,13 +54,3 @@ const processImage = async(req, res, next) => {
 };
 
 module.exports = processImage;
-
-    } catch (err) {
-        return res.status(500).json({ 
-            message: 'Image processing failed: ',
-            error: err.message 
-        });
-    }
-};
-
-module.exports = processImage;
