@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://agaciro.onrender.com",
+    baseURL: import.meta.env.PROD 
+        ? "https://agaciro.onrender.com" 
+        : "http://localhost:3000",
 });
 
 api.interceptors.request.use((config) => {
