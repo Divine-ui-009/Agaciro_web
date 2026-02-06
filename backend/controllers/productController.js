@@ -39,6 +39,14 @@ exports.updateProduct = async (req, res) => {
         const product = await Product.findById(id);
         if(!product) return res.status(404).json({ message: 'Product not found.'});
 
+        // Map form field names to schema field names
+        const { name, description, price, quantity } = req.body;
+        
+        if (name) product.proName = name;
+        if (description) product.description = description;
+        if (price !== undefined) product.price = price;
+        if (quantity !== undefined) product.quantity = quantity;
+
         if(req.file){
             if(product.productImage && product.productImage !== DEFAULT_PRODUCT_IMAGE){
                 // remove leading slash to form a relative path to the project root (e.g. 'uploads/file.png')
@@ -53,7 +61,7 @@ exports.updateProduct = async (req, res) => {
             }
             product.productImage = req.file.publicPath;
         }
-        Object.assign(product, req.body);
+        
         await product.save();
 
         res.json({ message: 'Product updated', product });

@@ -174,7 +174,7 @@ export default function AdminProducts(){
           <p className="text-center py-8 text-gray-600">No products yet. Add your first product!</p>
         ) : (
           <div className="space-y-6 max-w-4xl">
-            {products.map(p => {
+            {[...products].sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()).map(p => {
               const imgSrc = resolveImage(p.imageUrl || '');
               return (
                 <div key={p._id} className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">

@@ -7,4 +7,5 @@ export interface Product {
     stock: number;
     imageUrl?: string;
     inStock: boolean;
+    createdAt?: string;
 }

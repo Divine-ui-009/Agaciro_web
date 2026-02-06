@@ -10,11 +10,12 @@ const mapServerProduct = (item: any): Product => ({
     stock: item.quantity ?? item.stock ?? 0,
     imageUrl: item.productImage || item.imageUrl || '',
     inStock: (item.quantity ?? item.stock ?? 0) > 0,
+    createdAt: item.createdAt,
 });
 
 export const getProducts = async () => {
-  const res = await api.get<Product[]>("/api/products");
-  return res.data;
+  const res = await api.get<any[]>("/api/products");
+  return (res.data || []).map(mapServerProduct);
 };
 
 export const getProductById = async (id: string): Promise<Product> => {
