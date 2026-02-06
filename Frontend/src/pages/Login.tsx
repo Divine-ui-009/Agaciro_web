@@ -38,15 +38,17 @@ function Login(){
                 password 
             });
 
+            
             const { token, user } = res.data as {
-                token: string;
-                user: User;
+              token: string;
+              user: User;
             };
+            console.log('Login response:', user, token); // Debug log
 
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
 
-            console.log('User role:', user.role); // Debug log
+            console.log('User role:', res.role); // Debug log
             console.log('Full user object:', user); // Debug log
 
             if (user && user.role === "admin") {
