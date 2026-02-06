@@ -29,6 +29,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/auth', require('./routes/userRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
+app.use('/api/stock', require('./routes/stockRoutes'));
 
 app.get('/', (req, res) => {
     res.send("Backend is running...");

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Order = require('../models/Order');
 const Product = require('../models/Product');
+const { recordStockChange } = require('./stockController');
 
 exports.createOrder = async (req, res) => {
     try {
@@ -48,9 +49,26 @@ exports.createOrder = async (req, res) => {
             status: 'Pending'
         });
 
+        await order.save();
+
         for(const item of populatedOrderItems){
             if( typeof item.quantity === 'number'){
+                const product = await Product.findById(item.product);
+                const previousQuantity = product.quantity;
                 await Product.findByIdAndUpdate(item.product, {$inc: {quantity: -item.quantity} });
+                
+                // Record stock change in history
+                await recordStockChange(
+                    item.product,
+                    item.name,
+                    'order',
+                    -item.quantity,
+                    previousQuantity,
+                    previousQuantity - item.quantity,
+                    req.user._id,
+                    order._id.toString(),
+                    `Order #${order._id}`
+                );
             }
         }
 
@@ -123,7 +141,22 @@ exports.deleteOrder = async (req, res) => {
 
         for( const item of order.orderItems ){
             if(typeof item.quantity === 'number'){
-                await Product.findByIdAndUpdate(item.product, {$inc: {quantity: item.quantity } });  
+                const product = await Product.findById(item.product);
+                const previousQuantity = product.quantity;
+                await Product.findByIdAndUpdate(item.product, {$inc: {quantity: item.quantity } });
+                
+                // Record stock restoration in history
+                await recordStockChange(
+                    item.product,
+                    item.name,
+                    'deletion',
+                    item.quantity,
+                    previousQuantity,
+                    previousQuantity + item.quantity,
+                    req.user._id,
+                    orderId,
+                    `Order #${orderId} deleted - stock restored`
+                );
             }
         }
 

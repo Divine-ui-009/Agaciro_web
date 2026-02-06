@@ -8,6 +8,8 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import Products from './pages/Products';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminOrders from './pages/admin/AdminOrders';
+import AdminStock from './pages/admin/AdminStock';
+import AdminStockHistory from './pages/admin/AdminStockHistory';
 
 import AdminRoute from './components/AdminRoute';
 // import Navbar from './components/Navbar';
@@ -44,6 +46,12 @@ function App() {
           />
           <Route path='/admin/orders'
             element={<AdminRoute><AdminOrders /></AdminRoute>}
+          />
+          <Route path='/admin/stock'
+            element={<AdminRoute><AdminStock /></AdminRoute>}
+          />
+          <Route path='/admin/stock-history'
+            element={<AdminRoute><AdminStockHistory /></AdminRoute>}
           />
 
         </Routes>
