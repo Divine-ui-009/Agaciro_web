@@ -11,8 +11,8 @@ const app = express();
 // CORS configuration
 const corsOptions = {
     origin: process.env.NODE_ENV === 'production' 
-        ? ['https://agaciro.onrender.com', 'https://yourdomain.com'] // Replace with your actual domains
-        : ['http://localhost:5173', 'http://localhost:3000'], // Development origins
+        ? ['https://agaciro.onrender.com', 'https://agaciro.vercel.app', 'http://localhost:5173', 'http://localhost:3000'] // Allow localhost for testing
+        : ['http://localhost:5173'], // Development origins
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
