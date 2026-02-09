@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
 
 import Logo from "../assets/logo.png";
+import { useAuth } from '../context/AuthContext';
 
 type User = {
     id: string;
@@ -20,6 +21,18 @@ function Login(){
     const [ showPassword, setShowPassword ] = useState(false);
     const [ loading, setLoading ] = useState(false);
     const [ error, setError ] = useState("");
+
+    const {user} = useAuth();
+
+    useEffect(() => {
+      if (user && user.role === "admin") {
+        console.log('User is admin, navigating to dashboard'); // Debug log
+        navigate("/admin/dashboard", { replace: true });
+
+      } else if (user && user.role === "customer") {
+        navigate("/products", { replace: true });
+      }
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -48,7 +61,7 @@ function Login(){
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
 
-            console.log('User role:', res.role); // Debug log
+            console.log('User role:', user.role); // Debug log
             console.log('Full user object:', user); // Debug log
 
             if (user && user.role === "admin") {
@@ -58,6 +71,8 @@ function Login(){
                 console.log('Navigating to products'); // Debug log
                 navigate("/products", { replace: true });
             }
+
+            window.location.reload();
         }catch (err: any) {
             setError(
                 err.response?.data?.message || "Login failed. Try again."

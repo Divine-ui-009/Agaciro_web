@@ -73,7 +73,7 @@ const AdminStockHistory = () => {
   const fetchHistory = async () => {
     setLoading(true);
     try {
-      const { startDate, endDate } = getDateRange();
+      const { startDate } = getDateRange();
       
       let query = '/api/stock/history?';
       
