@@ -21,9 +21,9 @@ The system supports two user roles:
 - View all products
 - Update product details (Admin only)
 - Delete products (Admin only)
-- 
+  
 ### Database Integration
-- MySQL database connection using :contentReference[oaicite:5]{index=5}
+- MySQL database connection
 - Structured tables for users, products, and orders
 
 ---
@@ -34,3 +34,4 @@ The system supports two user roles:
 - React
 - Mysql
 - JWT authentication
+- and some others.
