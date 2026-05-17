@@ -35,3 +35,5 @@ The system supports two user roles:
 - Mysql
 - JWT authentication
 - and some others.
+
+Deployed on **Vercel** and **onRender** for the backend part. used **Mongo atlas** for the database
